@@ -42,5 +42,13 @@ The codebase is structured into explicit architectural layers, keeping low-level
         ├── BattleStats.c             # Persistent lifetime telemetry tracking logic
         │
         ├── ili9341.c                 # Display controller initialization sequence commands
+
+## 🛠️ Hardware Specifications
+* **Development Board:** STM32F429I-DISCO (Discovery kit with STM32F429ZI MCU)
+* **Core:** ARM® Cortex®-M4 with FPU executing at 180 MHz
+* **Onboard Display:** 2.4" QVGA TFT LCD handled via the **LTDC (LCD TFT Controller)** peripheral
+* **Touchscreen:** Resistive touch controller driven via the onboard **I2C interface (STMPE811)**
+* **External RAM:** 64-Mbit external **SDRAM** utilized for application and frame-buffer configurations
+* **Randomness:** On-chip **Hardware TRNG (True Random Number Generator)** utilized for AI decision routing
         ├── stmpe811.c                # Hardware touch polling/coordinate filtering
         └── sdram.c                   # Volatile frame-buffer external RAM configuration
