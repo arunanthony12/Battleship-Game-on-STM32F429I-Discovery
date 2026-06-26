@@ -8,8 +8,19 @@ A touchscreen-based implementation of the classic Battleship game developed in E
 * External RAM: 64-Mbit external "SDRAM" utilized for application and frame-buffer configurations
 * Randomness: On-chip "Hardware TRNG (True Random Number Generator)" utilized for AI decision routing
 
-## Repository Architecture
+## Flash Memory & Debugging Configuration
+### On-Chip Flash Persistence (`BattleStats.c`)
+To preserve user statistics and the global game hit-map across power cycles, this project utilizes the internal Flash sectors of the STM32F429ZI MCU. 
+* **Data Retention:** Tracks total games won/lost and coordinate strike mapping.
+* **Safety Mechanism:** Implements page-erasure safeguards to ensure game telemetry writes do not overwrite application code execution sectors.
 
+### Debugging & Telemetry Profile
+The project was tested and profiled using the integrated **ST-LINK V2-1** debugger.
+* **Interface:** SWD (Serial Wire Debug) configured at 4.0 MHz.
+* **Core Profiling:** Monitored volatile game arrays dynamically via live expression views to verify the state transitions of the Random Number Generator (RNG) logic.
+* **Hardware Intercepts:** System handling routines utilize dedicated hardware interrupt breakpoints (`stm32f4xx_it.c`) to safely log runtime display rendering exceptions.
+
+## Repository Architecture
 The codebase is structured into explicit architectural layers, keeping low-level hardware abstractions strictly isolated from core game state logic.
 
 ```text
