@@ -1,41 +1,46 @@
 A touchscreen-based implementation of the classic Battleship game developed in Embedded C using the STM32 HAL framework for the STM32F429I-DISC1 Discovery Board. The project demonstrates embedded graphics, touchscreen interaction, game-state management, and hardware peripheral integration on an ARM Cortex-M4 microcontroller.
 
 Repository Architecture
-├── .gitignore
-├── README.md
+## 📂 Repository Architecture
+
+The codebase is structured into explicit architectural layers, keeping low-level hardware abstractions strictly isolated from core game state logic.
+
+```text
 └── Core/
-    ├── Inc/
-    │   ├── ApplicationCode.h    <-- High-level application setup / hooks
-    │   ├── BattleStats.h        <-- Flash storage / persistent stats tracking
-    │   ├── fonts.h              <-- LCD text font definitions
-    │   ├── GameDisplay.h        <-- Game-specific UI rendering layer
-    │   ├── GameDriver.h         <-- Core game controller & state machine
-    │   ├── ili9341.h            <-- Display driver controller header
-    │   ├── LCD_Driver.h         <-- Graphic primitive drawing functions
-    │   ├── main.h               <-- System initialization & HAL bindings
-    │   ├── OnePlayer.h          <-- Single-player vs AI logic
-    │   ├── sdram.h              <-- External SDRAM configuration
-    │   ├── SharedPlayer.h       <-- Modular components used by both modes
-    │   ├── stm32f4xx_hal_conf.h <-- HAL library configuration
-    │   ├── stm32f4xx_it.h       <-- Interrupt service routine handlers
-    │   ├── stmpe811.h           <-- Touchscreen controller header
-    │   └── TwoPlayer.h          <-- Local multi-player logic
+    ├── Inc/                          # Header Interfaces
+    │   ├── main.h                    # System clock & peripheral configuration setup
+    │   ├── ApplicationCode.h         # High-level application setup & hook entrypoints
+    │   │
+    │   ├── GameDriver.h              # Central game controller & Finite State Machine (FSM) definitions
+    │   ├── OnePlayer.h               # Single-player vs AI engine parameters
+    │   ├── TwoPlayer.h               # Local multi-player pass-and-play states
+    │   ├── SharedPlayer.h            # Inter-mode shared game-state templates
+    │   │
+    │   ├── GameDisplay.h             # Game-specific GUI/viewport rendering
+    │   ├── LCD_Driver.h              # Low-level graphic primitive drawing utilities
+    │   ├── fonts.h                   # Pixel-font lookup matrices for UI text
+    │   │
+    │   ├── BattleStats.h             # Non-volatile Flash storage telemetry profiles
+    │   │
+    │   ├── ili9341.h                 # TFT LCD display driver controller
+    │   ├── stmpe811.h                # Resistive touchscreen controller interface
+    │   └── sdram.h                   # External SDRAM expansion parameters
     │
-    └── Src/
-        ├── ApplicationCode.c
-        ├── BattleStats.c
-        ├── fonts.c
-        ├── GameDisplay.c
-        ├── GameDriver.c
-        ├── ili9341.c
-        ├── LCD_Driver.c
-        ├── main.c
-        ├── Oneplayer.c
-        ├── sdram.c
-        ├── SharedPlayer.c
-        ├── stm32f4xx_hal_msp.c  <-- MCU support package (peripheral pins)
-        ├── stm32f4xx_it.c
-        ├── stmpe811.c
-        ├── sysmem.c             <-- Memory management (malloc/heap allocation)
-        ├── system_stm32f4xx.c   <-- System clock configuration setup
-        └── TwoPlayer.c
+    └── Src/                          # Source Implementations
+        ├── main.c                    # Hardware peripheral initializations (RNG, GPIO, timers)
+        ├── ApplicationCode.c         # Application-level control orchestration
+        │
+        ├── GameDriver.c              # Core turn loop, logic arbitration, and game rule evaluation
+        ├── Oneplayer.c               # RNG-driven strategic AI hunting/targeting routines
+        ├── TwoPlayer.c               # Blind-transition mechanics for multiplayer fog-of-war
+        ├── SharedPlayer.c            # Common routine implementations for board configurations
+        │
+        ├── GameDisplay.c             # Coordinate grid mapping, explosion, and splash rendering
+        ├── LCD_Driver.c              # Display drawing pipelines
+        ├── fonts.c                   # Static font rendering arrays
+        │
+        ├── BattleStats.c             # Persistent lifetime telemetry tracking logic
+        │
+        ├── ili9341.c                 # Display controller initialization sequence commands
+        ├── stmpe811.c                # Hardware touch polling/coordinate filtering
+        └── sdram.c                   # Volatile frame-buffer external RAM configuration
