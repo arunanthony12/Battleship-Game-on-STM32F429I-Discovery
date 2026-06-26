@@ -1,2 +1,1 @@
-# Battleship-Game-on-STM32F429I-Discovery
-This project implements the classic Battleship strategy game on the STM32F429I-Discovery development board using the STM32 HAL library. The game utilizes the onboard 480×272 TFT LCD and capacitive touchscreen to provide an interactive gaming experience without requiring any external hardware.
+A touchscreen-based implementation of the classic Battleship game developed in Embedded C using the STM32 HAL framework for the STM32F429I-DISC1 Discovery Board. The project demonstrates embedded graphics, touchscreen interaction, game-state management, and hardware peripheral integration on an ARM Cortex-M4 microcontroller.
