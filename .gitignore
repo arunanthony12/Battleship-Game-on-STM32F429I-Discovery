@@ -1,55 +1,34 @@
-# Prerequisites
-*.d
+#==============================================================================
+# STM32CubeIDE / Toolchain Ignored Files
+#==============================================================================
 
-# Object files
+# Compilation Binaries & Object Files
+Build/
+Debug/
+Release/
 *.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
+*.d
 *.su
-*.idb
-*.pdb
+*.elf
+*.bin
+*.hex
+*.map
+*.list
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# Auto-generated Hardware Initialization / Configuration Files
+.mxproject
 
-# debug information files
-*.dwo
+# Local IDE Workspace Preferences (Do NOT share these; they contain local paths)
+.settings/
+.ecl_cc_options
+*.launch
+*compile_commands.json
+
+# Toolchain-specific logs
+*.log
+
+#==============================================================================
+# OS & System Trash Files
+#==============================================================================
+.DS_Store
+Thumbs.db
