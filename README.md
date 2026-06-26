@@ -8,8 +8,7 @@ A touchscreen-based implementation of the classic Battleship game developed in E
 * External RAM: 64-Mbit external "SDRAM" utilized for application and frame-buffer configurations
 * Randomness: On-chip "Hardware TRNG (True Random Number Generator)" utilized for AI decision routing
 
-Repository Architecture
-## 📂 Repository Architecture
+## Repository Architecture
 
 The codebase is structured into explicit architectural layers, keeping low-level hardware abstractions strictly isolated from core game state logic.
 
