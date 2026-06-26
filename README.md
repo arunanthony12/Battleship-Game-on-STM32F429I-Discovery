@@ -1,5 +1,23 @@
 A touchscreen-based implementation of the classic Battleship game developed in Embedded C using the STM32 HAL framework for the STM32F429I-DISC1 Discovery Board. The project demonstrates embedded graphics, touchscreen interaction, game-state management, and hardware peripheral integration on an ARM Cortex-M4 microcontroller.
 
+## 🏗️ Project Origin & Toolchain Development Workflow
+
+### 📦 1. Project Initialization & Starter Template
+This project was initially imported into the workspace as a compressed ZIP starter archive (`LCDStarterCodeSDRAM.zip`). 
+* **Import Pipeline:** Handled natively via STM32CubeIDE (`File -> Import -> General -> Existing Projects into Workspace -> Select Archive File`).
+* **Base Dependencies:** The template bundled pre-configured low-level initialization properties for the external board extensions, namely standard pixel text fonts (`fonts.c`), basic LCD drivers (`ili9341.c`), and SDRAM frame-buffering initializers (`sdram.c`).
+
+### ⚙️ 2. Hardware Refinement via STM32CubeMX
+The physical target layer and pin mapping dependencies were managed using the integrated graphical device configurator, **STM32CubeMX** (via the `.ioc` hardware configuration layout file):
+* **Clock Tree Alignment:** Configured the Internal/External oscillators to stabilize the core ARM Cortex-M4 clocks at its 180 MHz speed threshold.
+* **Peripherals Provisioning:** Leveraged CubeMX to activate the native **Hardware TRNG (True Random Number Generator)** required for unpredictable AI target choices and initialized the **I2C/SPI pinouts** to route data efficiently to the `stmpe811` and `ili9341` controller lines.
+* **Code Generation Boundary:** System peripheral configuration hooks are auto-generated directly into `main.c`. Custom game logic modules (`GameDriver.c`, `Oneplayer.c`, etc.) are maintained completely within strict isolated design structures to ensure re-generating hardware attributes inside CubeMX never breaks or overwrites the game code.
+
+### 🔨 3. Compilation & Toolchain Build Execution
+The overall application is managed, cross-compiled, and built strictly within **STM32CubeIDE** using the dedicated **GNU ARM Embedded Toolchain (GCC)**:
+* **Optimization Profile:** Compiles `.c` source sheets into highly efficient machine binaries.
+* **Linker Script Allocation:** The toolchain compiles system maps directly to specific target addresses, ensuring vital variable storage partitions are assigned to external volatile SDRAM registers while tracking long-term statistical metrics safely in dedicated non-volatile sectors of internal Flash memory.
+
 ## Hardware Specifications
 * Development Board: STM32F429I-DISCO (Discovery kit with STM32F429ZI MCU)
 * Core: ARM® Cortex®-M4 with FPU executing at 180 MHz
