@@ -43,7 +43,7 @@ The codebase is structured into explicit architectural layers, keeping low-level
         │
         ├── ili9341.c                 # Display controller initialization sequence commands
 
-## 🛠️ Hardware Specifications
+## Hardware Specifications
 * **Development Board:** STM32F429I-DISCO (Discovery kit with STM32F429ZI MCU)
 * **Core:** ARM® Cortex®-M4 with FPU executing at 180 MHz
 * **Onboard Display:** 2.4" QVGA TFT LCD handled via the **LTDC (LCD TFT Controller)** peripheral
